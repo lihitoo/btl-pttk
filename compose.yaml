@@ -1,0 +1,37 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: restman6
+      MYSQL_USER: restman6
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Copy .env.example to .env first}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Copy .env.example to .env first}
+      TZ: Asia/Bangkok
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_as_ci"]
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - restman_data6:/var/lib/mysql
+      - ./database/schema-mysql6.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/seed6.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+      - ./database/permissions-docker6.sql:/docker-entrypoint-initdb.d/99-permissions.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysql -h127.0.0.1 -uroot -p\"$${MYSQL_ROOT_PASSWORD}\" -e 'SELECT COUNT(*) FROM restman6.Invoice6' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      start_period: 20s
+  web:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RESTMAN_DB_URL: "jdbc:mysql://db:3306/restman6?useUnicode=true&characterEncoding=UTF-8&connectionTimeZone=Asia/Bangkok&serverTimezone=Asia/Bangkok&allowPublicKeyRetrieval=true&useSSL=false"
+      RESTMAN_DB_USER: restman6
+      RESTMAN_DB_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: Asia/Bangkok
+    ports:
+      - "127.0.0.1:8080:8080"
+volumes:
+  restman_data6:

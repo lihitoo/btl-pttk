@@ -1,0 +1,48 @@
+/* Bố cục theo Hình 4.5–4.10 trong báo cáo; không dùng thư viện giao diện. */
+* { box-sizing: border-box; }
+body { margin: 0; background: #f2f4f6; color: #1e2b38; font: 16px/1.5 Arial, sans-serif; }
+header { background: #90202b; color: white; padding: 20px 6%; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+a { color: #a51d2c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.brand { color: white; font-size: 24px; font-weight: 700; }
+.account { display: flex; align-items: center; gap: 20px; }
+.account form { margin: 0; }
+main { width: calc(100% - 80px); max-width: 1400px; margin: 28px auto; background: white; border: 1px solid #d6dfe7; border-radius: 8px; padding: 28px; }
+.eyebrow { font-size: 14px; margin-bottom: 6px; }
+h1 { margin: 0 0 22px; font-size: 26px; line-height: 1.3; }
+h2 { font-size: 20px; margin: 10px 0 20px; }
+p { margin: 14px 0; }
+label { display: block; font-weight: 700; margin-bottom: 6px; }
+input { display: block; font: inherit; height: 43px; padding: 8px 11px; border: 1px solid #aebccb; border-radius: 5px; color: #17212b; max-width: 100%; }
+input[name="keyword"] { width: 270px; font-weight: 600; }
+input[type="date"] { width: 205px; font-weight: 600; }
+button { cursor: pointer; border: 0; border-radius: 5px; background: #95202d; color: white; font: inherit; padding: 10px 19px; min-height: 43px; }
+button:hover { background: #761621; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid #486fa0; outline-offset: 3px; }
+.logout { color: #74202a; background: #f0e6e7; }
+.logout:hover { background: #e3d3d5; }
+.filters { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+.table-wrap { width: 100%; overflow-x: auto; margin: 20px 0 16px; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { background: #ecf0f3; font-weight: 700; }
+th, td { padding: 11px 10px; border-bottom: 1px solid #d6dfe7; white-space: nowrap; }
+.total { font-size: 23px; text-align: right; font-weight: 700; margin: 20px 0; }
+.info { border: 1px solid #d6dfe7; border-radius: 6px; padding: 16px 22px; margin-bottom: 20px; }
+.info p { margin: 10px 0; }
+.selected { background: #fff2d5; }
+.badge { background: #e4f3ec; padding: 5px 9px; border-radius: 4px; }
+.muted, footer { color: #617081; font-size: 14px; }
+.error { padding: 12px 14px; background: #fff0ef; border-left: 4px solid #a51d2c; color: #8b1c26; }
+.login-form { max-width: 390px; }
+.login-form input { width: 100%; margin-bottom: 18px; }
+.report-list { padding-left: 22px; }
+.report-list li { margin: 16px 0; }
+footer { text-align: center; margin: 26px 16px 40px; }
+@media (max-width: 700px) {
+  header { padding: 16px; align-items: flex-start; }
+  .account { flex-wrap: wrap; justify-content: flex-end; gap: 10px; font-size: 13px; }
+  main { width: calc(100% - 24px); padding: 18px; margin: 16px auto; }
+  h1 { font-size: 23px; }
+  .total { font-size: 19px; }
+  th, td { font-size: 14px; }
+}

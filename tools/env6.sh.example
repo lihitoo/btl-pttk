@@ -1,0 +1,5 @@
+export RESTMAN_DB_URL='jdbc:mysql://127.0.0.1:3306/restman6?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Bangkok&connectionTimeZone=Asia/Bangkok&allowPublicKeyRetrieval=true&useSSL=false'
+export RESTMAN_DB_USER='restman6'
+export RESTMAN_DB_PASSWORD='RestmanDemo6!'
+export JAVA_OPTS='-Dfile.encoding=UTF-8 -Duser.timezone=Asia/Bangkok'
+export MAVEN_OPTS="$JAVA_OPTS"

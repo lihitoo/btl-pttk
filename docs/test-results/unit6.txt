@@ -1,0 +1,34 @@
+PASS: trim keyword [Cơm]
+PASS: LIKE contains [%Cơm%]
+PASS: escape %, _, ! [%!%!_!!%]
+PASS: reject empty keyword
+PASS: reject null keyword
+PASS: reject long keyword
+PASS: accept maximum length [150]
+PASS: parse positive id [12]
+PASS: reject zero id
+PASS: reject negative id
+PASS: reject nonnumeric id
+PASS: reject null id
+PASS: reject overflowing id
+PASS: inclusive last day becomes exclusive next day [2026-11-01]
+PASS: leap date [29]
+PASS: invalid date
+PASS: reversed dates
+PASS: missing date
+PASS: avoid next-day overflow in DB
+PASS: reject zero time interval
+PASS: escape HTML [&lt;b&gt;&quot;&amp;&#39;]
+PASS: null HTML []
+PASS: URL encoding
+PASS: Vietnamese money [65.000 đ]
+PASS: do not truncate fraction [12,25 đ]
+PASS: line amount
+PASS: invoice total
+PASS: empty order total
+PASS: password verifies
+PASS: wrong password rejected
+PASS: null password rejected
+PASS: malformed hash rejected
+PASS: random salt
+TOTAL: 33 checks passed

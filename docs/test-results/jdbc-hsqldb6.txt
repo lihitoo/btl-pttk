@@ -1,0 +1,58 @@
+DB: HSQL Database Engine 1.8.0
+PASS: search partial name [1]
+PASS: trim and case insensitive [1]
+PASS: no result [0]
+PASS: percent not wildcard [0]
+PASS: underscore not wildcard [0]
+PASS: SQL injection is data [0]
+PASS: detail by id [Cơm gà]
+PASS: missing food optional
+PASS: three foods in October [3]
+PASS: revenue order 0 [1]
+PASS: food revenue 0
+PASS: revenue order 1 [2]
+PASS: food revenue 1
+PASS: revenue order 2 [3]
+PASS: food revenue 2
+PASS: October total 505000
+PASS: repeated orders kept separate [3]
+PASS: first order line [1001]
+PASS: second line same food same order [1003]
+PASS: history sum equals food revenue
+PASS: historical price retained
+PASS: current price separate
+PASS: invoice 201 [201]
+PASS: all invoice lines [3]
+PASS: other food in same invoice [3]
+PASS: invoice total 210000
+PASS: table B01 [B01]
+PASS: staff name [Nhân viên bán hàng]
+PASS: order without invoice
+PASS: unpaid invoice loads but excluded in report [UNPAID]
+PASS: restore autocommit after invoice read
+PASS: empty interval [0]
+PASS: include first moment November [1]
+PASS: exclude end boundary [0]
+PASS: customer login [CUSTOMER]
+PASS: manager login [MANAGER]
+PASS: wrong password
+PASS: locked account
+PASS: login SQL injection
+PASS: seeded table User6
+PASS: seeded table Account6
+PASS: seeded table Employee6
+PASS: seeded table Customer6
+PASS: seeded table Food6
+PASS: seeded table Combo6
+PASS: seeded table ComboDetail6
+PASS: seeded table DiningTable6
+PASS: seeded table Reservation6
+PASS: seeded table Order6
+PASS: seeded table OrderDetail6
+PASS: seeded table Invoice6
+PASS: seeded table MembershipCard6
+PASS: seeded table Ingredient6
+PASS: seeded table Supplier6
+PASS: seeded table ImportReceipt6
+PASS: seeded table ImportReceiptDetail6
+TOTAL: 56 checks passed

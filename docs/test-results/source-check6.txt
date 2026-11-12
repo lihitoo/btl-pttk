@@ -1,0 +1,18 @@
+Source: report BTL 41 pages; whitespace-insensitive fragment checks.
+PASS: DAO6 constructor
+PASS: FoodDAO6.searchFoodByName
+PASS: FoodDAO6.getFoodDetail
+PASS: OrderDetail6.getLineAmount
+PASS: Invoice6.getTotalAmount
+PASS: Statistic JDBC binding and mapping
+PASS: UI date normalization
+PASS: Invoice detail loading fragment
+PASS: AuthFilter denied condition
+PASS: Revenue SQL
+PASS: Order history SQL
+PASS XML: pom.xml
+PASS XML: src/main/webapp/WEB-INF/web.xml
+PASS XML: src/main/webapp/META-INF/context.xml
+PASS YAML syntax: compose.yaml
+PASS YAML syntax: .github/workflows/demo6.yml
+PASS: all project class names end in 6; no absolute development paths/TODOs

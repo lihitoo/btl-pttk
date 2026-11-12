@@ -1,0 +1,12 @@
+target/
+.env
+.idea/
+.vscode/
+*.iml
+*.log
+*.class
+*.war
+.DS_Store
+tools/env6.ps1
+tools/env6.sh
+__pycache__/

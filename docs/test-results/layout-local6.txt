@@ -1,0 +1,13 @@
+HTML from LOCAL Servlet adapter + HSQLDB; rendered in-memory in Chromium.
+This does NOT test browser navigation, JSP compilation or Tomcat/MySQL.
+PASS layout: 01-login6.png
+PASS layout: 02-customer-home6.png
+PASS layout: 03-search6.png
+PASS layout: 04-food-detail6.png
+PASS layout: 05-manager-home6.png
+PASS layout: 06-report-selection6.png
+PASS layout: 07-statistics6.png
+PASS layout: 11-mobile6.png
+PASS layout: 08-history6.png
+PASS layout: 09-invoice6.png
+PASS layout: 10-invalid-dates6.png

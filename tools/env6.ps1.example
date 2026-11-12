@@ -1,0 +1,5 @@
+$env:RESTMAN_DB_URL = 'jdbc:mysql://127.0.0.1:3306/restman6?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Bangkok&connectionTimeZone=Asia/Bangkok&allowPublicKeyRetrieval=true&useSSL=false'
+$env:RESTMAN_DB_USER = 'restman6'
+$env:RESTMAN_DB_PASSWORD = 'RestmanDemo6!'
+$env:JAVA_OPTS = '-Dfile.encoding=UTF-8 -Duser.timezone=Asia/Bangkok'
+$env:MAVEN_OPTS = $env:JAVA_OPTS

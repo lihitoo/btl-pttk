@@ -1,0 +1,52 @@
+PASS: anonymous redirected to login
+PASS: login rejects missing CSRF
+PASS: wrong password
+PASS: locked account
+PASS: customer login and redirect
+PASS: session rotated after login
+PASS: empty search form
+PASS: authenticated page not cached
+PASS: security header
+PASS: search reaches JDBC
+PASS: detail link retains keyword
+PASS: invalid keyword length 0
+PASS: invalid keyword length 151
+PASS: no result for khôngcómónnày
+PASS: no result for %
+PASS: no result for _
+PASS: no result for ' OR 1=1 --
+PASS: escape HTML injection
+PASS: food detail
+PASS: back link retains search
+PASS: food not found
+PASS: invalid food id
+PASS: customer blocked from manager
+PASS: logout requires POST
+PASS: logout checks CSRF
+PASS: logout success
+PASS: session invalidated
+PASS: manager login
+PASS: manager blocked from customer route
+PASS: report selection
+PASS: statistics input form
+PASS: report amounts 505000
+PASS: history three occurrences
+PASS: exclude unpaid and out of range
+PASS: invoice total
+PASS: invoice includes all foods and repeated occurrence
+PASS: highlight selected occurrence
+PASS: history back link retains filter
+PASS: reject wrong invoice context {'detailId': 1004}
+PASS: reject wrong invoice context {'foodId': 3}
+PASS: reject wrong invoice context {'start': '2026-11-01', 'end': '2026-11-30'}
+PASS: reject unpaid invoice in report
+PASS: missing invoice
+PASS: invalid period {'start': '2026-10-31', 'end': '2026-10-01'}
+PASS: invalid period {'start': '2026-02-30', 'end': '2026-03-01'}
+PASS: invalid period {'start': '2026-10-01'}
+PASS: empty report
+PASS: include payment at start of November
+PASS: food without history
+PASS: read-only page rejects POST
+TOTAL: 50 HTTP checks passed
+BASE: http://127.0.0.1:8086/restman6
