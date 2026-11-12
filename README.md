@@ -4,7 +4,55 @@
 
 Dự án cài đặt **hai module trong báo cáo BTL**: tìm kiếm/xem chi tiết món ăn; thống kê doanh thu/xem lần gọi món/xem hóa đơn. Có đăng nhập, phân quyền và đăng xuất. Không cài thêm Spring, React, Hibernate hoặc thư viện giao diện.
 
-**Trạng thái kiểm thử:** nguồn Java đã biên dịch và kiểm thử cục bộ; **chưa chạy xác nhận trên Tomcat/MySQL trong phiên xây dựng** do môi trường không tải được các runtime. Cấu hình triển khai và bộ kiểm thử đích có sẵn. Không dùng kết quả HSQLDB để kết luận MySQL đã đạt. Xem [kết quả kiểm thử](docs/TEST_STATUS.md).
+**Trạng thái kiểm thử ngày 12/11/2026:** build WAR thành công; đạt **33 kiểm tra Java, 56 kiểm tra JDBC trên MySQL 8.0.44 và 50 kiểm tra HTTP qua Tomcat 9.0.98**, dùng JDK 24. Docker Compose/MySQL 8.4 chưa được xác nhận trong lần chạy này. Xem [kết quả kiểm thử](docs/TEST_STATUS.md).
+
+## Mở nhanh trên máy demo đã cấu hình
+
+1. Mở thư mục `RestMan6`, nhấp đúp **[MO-RESTMAN6.bat](MO-RESTMAN6.bat)**.
+2. Chờ file tự khởi động MySQL demo ở cổng **3307** và Tomcat ở cổng **8081**.
+3. Trình duyệt tự mở **http://localhost:8081/restman6/login**. Đăng nhập bằng tài khoản mẫu bên dưới.
+
+Nếu đã chạy, file mở lại trang mà không tạo thêm server. Đóng trình duyệt không tắt database hoặc Tomcat.
+
+Cách này dùng runtime và database đã được chuẩn bị trên máy hiện tại trong `target/local-runtime`, MySQL Server 8.0 và `JAVA_HOME` trỏ tới JDK 17 trở lên. Clone repo sang máy khác cần cài đặt theo hướng dẫn bên dưới. **Không chạy `mvn clean` khi muốn giữ runtime và dữ liệu demo trong `target/local-runtime`.**
+
+### Tài khoản và mật khẩu mẫu
+
+| Vai trò trên website | Tên đăng nhập | Mật khẩu mẫu |
+|---|---|---|
+| Khách hàng | `customer6` | `Customer@123` |
+| Quản lí | `manager6` | `Manager@123` |
+
+Database đã nạp dữ liệu mẫu từ `database/seed6.sql`: tài khoản, món ăn, đơn gọi món và hóa đơn. Website truy vấn MySQL trực tiếp. Đây là dữ liệu demo, không phải dữ liệu kinh doanh thực tế.
+
+### Mở database bằng MySQL Workbench
+
+Mở **MySQL Workbench**, bấm **+** cạnh **MySQL Connections** và điền:
+
+| Trường | Giá trị |
+|---|---|
+| Connection Name | `RestMan6 Demo` |
+| Connection Method | `Standard (TCP/IP)` |
+| Hostname | `127.0.0.1` |
+| Port | `3307` |
+| Username | `restman6` |
+| Password | `RestmanDemo6!` |
+| Default Schema | `restman6` |
+
+Bấm **Test Connection → OK**, mở kết nối rồi chọn schema `restman6`. Tài khoản `restman6` chỉ có quyền **SELECT**. Tài khoản quản trị của database demo cục bộ đã chuẩn bị là `root`, mật khẩu mẫu `RootDemo6!`, cùng cổng `3307`; chỉ dùng khi cần quản trị database demo.
+
+Ví dụ xem dữ liệu trong tab SQL, bấm biểu tượng tia sét hoặc `Ctrl+Shift+Enter`:
+
+```sql
+USE restman6;
+SHOW TABLES;
+SELECT * FROM Food6;
+SELECT * FROM Invoice6;
+```
+
+Các mật khẩu trên chỉ dùng cho demo localhost. Với Docker, thông tin MySQL theo `.env` được chép từ `.env.example`; nếu đã đổi mật khẩu thì dùng giá trị đã cấu hình. Không commit `.env` hoặc mật khẩu thật.
+
+Nếu không mở được, xem `target/local-runtime/mysql-stderr.log` và `target/local-runtime/tomcat-stderr.log`. Cổng **8081** là bản chạy nhanh trên máy demo; cổng **8080** trong hướng dẫn Docker bên dưới là cấu hình mặc định của Compose.
 
 ## 1. Chạy bằng Docker
 
@@ -26,12 +74,7 @@ docker compose logs -f web
 
 Sau khi Tomcat khởi động, mở **http://localhost:8080/restman6/login**. `Ctrl+C` thoát màn hình log, không tắt ứng dụng. MySQL tự tạo 17 bảng và nạp `seed6.sql` khi volume còn trống.
 
-| Vai trò demo | Tên đăng nhập | Mật khẩu mẫu |
-|---|---|---|
-| Khách hàng | `customer6` | `Customer@123` |
-| Quản lí | `manager6` | `Manager@123` |
-
-Các tài khoản này chỉ dùng cho bài tập trên máy cá nhân. Không đưa cấu hình/mật khẩu thật vào GitHub. `.env` đã có trong `.gitignore`.
+Đăng nhập bằng tài khoản khách hàng hoặc quản lí trong bảng tài khoản mẫu ở trên. `.env` đã có trong `.gitignore`.
 
 Tắt và giữ dữ liệu: `docker compose down`. **Đặt lại dữ liệu demo (xóa toàn bộ dữ liệu trong volume của dự án):** `docker compose down -v`, sau đó chạy lại `docker compose up -d --build`. Không dùng `-v` khi cần giữ dữ liệu vừa nhập.
 
@@ -77,10 +120,12 @@ Bắt đầu với `Food6.java` → `FoodDAO6.java` → `SearchFoodUI6.java`. Sa
 ## 4. Build và kiểm thử
 
 ```bash
-mvn clean package            # chạy 33 kiểm tra Java, tạo target/restman6.war
+mvn package                  # chạy 33 kiểm tra Java, tạo target/restman6.war
 mvn test -Pmysql-test         # thêm 56 kiểm tra JDBC trên MySQL đã nạp seed6.sql
 python tools/http-test6.py http://localhost:8080/restman6
 ```
+
+Với bản mở nhanh bằng `MO-RESTMAN6.bat`, thay URL kiểm thử HTTP bằng `http://localhost:8081/restman6`. Nếu sửa code, cần triển khai WAR mới vào Tomcat và khởi động lại; file mở nhanh chỉ khởi động bản đã triển khai.
 
 Với Maven chạy ngoài Docker, cấu hình `RESTMAN_DB_URL`, `RESTMAN_DB_USER`, `RESTMAN_DB_PASSWORD` trước khi chạy profile `mysql-test`. Nếu kết nối MySQL trong Compose, dùng cổng **3307**; MySQL cài trực tiếp thường là **3306**. Dữ liệu cần ở trạng thái `seed6.sql` ban đầu. Kiểm thử JDBC và HTTP chỉ đọc dữ liệu, không reset database.
 

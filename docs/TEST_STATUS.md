@@ -1,5 +1,20 @@
 # Trạng thái kiểm thử — 12/11/2026
 
+## Cập nhật chạy thật trên Windows
+
+Đã chạy trực tiếp bằng JDK 24.0.2, Maven 3.9.12, Tomcat 9.0.98 và MySQL 8.0.44, database demo riêng ở `127.0.0.1:3307`, web ở `http://localhost:8081/restman6`:
+
+| Lệnh / thao tác | Kết quả |
+|---|---|
+| `mvn -B -ntp package` | BUILD SUCCESS; tạo `target/restman6.war`; 33/33 kiểm tra Java |
+| `mvn -B -ntp test -Pmysql-test` với biến kết nối database demo | BUILD SUCCESS; 33/33 Java, 56/56 JDBC trên MySQL 8.0.44 |
+| `python tools/http-test6.py http://localhost:8081/restman6` | 50/50 kiểm tra HTTP qua Tomcat |
+| `MO-RESTMAN6.bat` | Mở lại trang khi server đang chạy; khởi động lại Tomcat thành công khi Tomcat đã tắt |
+
+Đã mở trang đăng nhập trong trình duyệt. Bộ kiểm tra xác nhận tổng doanh thu tháng 10 là 505.000đ và hóa đơn #201 là 210.000đ. Maven có cảnh báo thread dọn kết nối MySQL còn sống khi kết thúc bài JDBC; lệnh vẫn trả mã 0 và BUILD SUCCESS.
+
+Docker Desktop gặp lỗi kết nối WSL và thiếu bộ nhớ trong lần chạy này, nên chưa xác nhận Docker Compose hoặc MySQL 8.4. Các kết quả HSQLDB, ảnh và giới hạn của **phiên tạo dự án ban đầu** được giữ bên dưới để phân biệt với lần chạy thật này.
+
 ## Đã thực hiện
 
 | Hạng mục | Kết quả | Môi trường |
@@ -13,7 +28,7 @@
 
 Log gốc nằm trong `test-results/unit6.txt`, `jdbc-hsqldb6.txt`, `http-local6.txt`, `layout-local6.txt`, `source-check6.txt`. Không lấy lại kết quả 45/45 hoặc 16/16 từ báo cáo cũ.
 
-## Chưa xác nhận
+## Những phần chưa xác nhận trong phiên tạo dự án ban đầu
 
 **Chưa chạy Maven package, WAR/JSP trên Tomcat 9, MySQL 8.4, Docker Compose hoặc GitHub Actions trong môi trường đích.** Phiên tạo dự án không có Maven, Tomcat, MySQL/Docker và không tải được các gói qua mạng. Vì vậy không gắn nhãn “Tomcat/MySQL đã đạt”. Có cấu hình build/deploy và các bài test để chạy lại trên môi trường đó.
 
